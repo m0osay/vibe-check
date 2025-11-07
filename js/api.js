@@ -1,10 +1,22 @@
 // Call Claude API
 async function callClaude(prompt, systemPrompt = "") {
   try {
+    // Get API key from environment or prompt user
+    const apiKey = localStorage.getItem('claude_api_key') || prompt('Please enter your Claude API key:');
+    if (!apiKey) {
+      throw new Error("API key is required");
+    }
+    // Store it for future use
+    if (!localStorage.getItem('claude_api_key')) {
+      localStorage.setItem('claude_api_key', apiKey);
+    }
+
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
