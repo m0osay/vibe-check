@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Check - AI Mood Playlist</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Background canvas for animations -->
+    <canvas id="moodCanvas"></canvas>
+    
+    <div id="app">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>Vibe Check</h1>
+            <p>Music that matches your mood</p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <h2>How are you feeling?</h2>
+            <textarea 
+                id="moodInput" 
+                placeholder="I'm feeling anxious about my presentation tomorrow..."
+                rows="4"
+            ></textarea>
+            
+            <button id="submitBtn" class="submit-btn">
+                Analyze My Vibe
+            </button>
+
+            <!-- Optional: Camera button for future -->
+            <!-- <button id="cameraBtn">📸 Show My Vibe</button> -->
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Analyzing your vibe...</p>
+        </div>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results hidden">
+            <!-- Mood Display -->
+            <div class="mood-display">
+                <h3>Your Vibe: <span id="moodLabel"></span></h3>
+                <p id="moodDescription"></p>
+                <div class="energy-bar">
+                    <div id="energyLevel" class="energy-fill"></div>
+                </div>
+            </div>
+
+            <!-- Playlist -->
+            <div class="playlist-container">
+                <h3>Your Playlist</h3>
+                <div id="playlistCards" class="playlist-grid">
+                    <!-- Song cards will be inserted here by ui.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Display -->
+        <div id="errorMessage" class="error hidden"></div>
+    </div>
+
+    <!-- Load scripts in order -->
+    <script src="js/api.js"></script>
+    <script src="js/visualizer.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
