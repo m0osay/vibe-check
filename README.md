@@ -1,62 +1,155 @@
-# vibe-check
+# 🎵 Vibe Check
 
-A web application that analyzes your mood and generates a personalized music playlist using AI.
+**Music that matches your mood.**
 
-## How to Run
+Vibe Check is an AI-powered mood companion that analyzes your emotional state and creates personalized therapeutic playlists with stunning real-time visualizations.
 
-### Option 1: Using Python's Built-in Server (Recommended)
+![Vibe Check Demo](assets/demo.gif)
+*[Add a demo GIF or screenshot here]*
 
-1. Open a terminal in the project directory
-2. Run one of these commands:
+---
 
-**Python 3:**
+## 🌟 Features
+
+- **AI Mood Analysis** - Powered by Claude AI to understand your emotional state from natural language
+- **Personalized Playlists** - 10-12 curated songs with explanations for why each matches your vibe
+- **Dynamic Visualizations** - Real-time particle animations that adapt to your mood
+- **Mood-Adaptive Design** - Color palettes and animations change based on your emotional state
+- **Instant Results** - Get your personalized experience in seconds
+
+---
+
+## 🎨 Supported Moods
+
+- Anxious 😰
+- Happy 😊
+- Sad 😢
+- Energetic ⚡
+- Chill 😌
+- Melancholic 🌧️
+- Excited 🎉
+- Calm 🧘
+- Stressed 😓
+
+Each mood features unique particle animations and color schemes!
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- No server required for basic functionality
+
+### Installation
+
+1. **Clone the repository**
 ```bash
+git clone https://github.com/yourusername/vibe-check.git
+cd vibe-check
+```
+
+2. **Open in browser**
+```bash
+# Option 1: Double-click index.html
+
+# Option 2: Use Python server
 python3 -m http.server 8000
+# Then open http://localhost:8000
+
+# Option 3: Use VS Code Live Server
+# Right-click index.html → Open with Live Server
 ```
 
-**Python 2:**
-```bash
-python -m SimpleHTTPServer 8000
+3. **Start vibing!** 🎉
+
+---
+
+## 📁 Project Structure
+```
+vibe-check/
+├── index.html              # Main HTML structure
+├── css/
+│   └── styles.css         # All styling and animations
+├── js/
+│   ├── app.js            # Main application coordinator
+│   ├── api.js            # Claude API integration
+│   ├── ui.js             # DOM manipulation and UI updates
+│   └── visualizer.js     # Canvas-based particle animations
+└── assets/
+    └── (images/icons)
 ```
 
-3. Open your browser and navigate to:
-   ```
-   http://localhost:8000
-   ```
+---
 
-### Option 2: Using Node.js (if you have it installed)
+## 🛠️ Tech Stack
 
-```bash
-npx http-server -p 8000
-```
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3
+- **AI**: Claude API (Anthropic)
+- **Animations**: HTML5 Canvas
+- **Design**: Custom particle systems, gradient animations
 
-Then open `http://localhost:8000` in your browser.
+---
 
-### Option 3: Using VS Code Live Server
+## 💡 How It Works
 
-If you're using VS Code, you can install the "Live Server" extension and right-click on `index.html` → "Open with Live Server"
+1. **User Input**: Describe your current emotional state in natural language
+2. **AI Analysis**: Claude API analyzes the text and extracts:
+   - Mood type (anxious, happy, sad, etc.)
+   - Energy level (1-10)
+   - Emotional keywords
+   - Suggested color palette
+3. **Visualization**: Particle system activates with mood-specific behaviors
+4. **Playlist Generation**: AI curates 10-12 songs with explanations
+5. **Display**: Beautiful UI presents your personalized vibe experience
 
-## Setup
+---
 
-1. **Get a Google Gemini API Key (FREE!):**
-   - Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
-   - Sign in with your Google account
-   - Click "Create API Key" 
-   - Copy your API key (starts with `AIza...`)
-   - **Note:** Gemini API has a generous free tier with rate limits, perfect for personal projects!
+## 🎯 Use Cases
 
-2. **First Run:**
-   - When you first use the app, it will prompt you to enter your Gemini API key
-   - The key will be stored in your browser's localStorage for future sessions
-   - You can clear it anytime by clearing your browser's localStorage
+- **Mental Health Support** - Process emotions through music
+- **Mood Discovery** - Understand your emotional state better
+- **Music Discovery** - Find new songs that match how you feel
+- **Stress Relief** - Quick therapeutic experience during busy days
+- **Creative Inspiration** - Set the right mood for work or creativity
 
-## Usage
+---
 
-1. Open the app in your browser
-2. Enter a description of how you're feeling in the text area
-3. Click "Analyze My Vibe"
-4. The app will analyze your mood and generate a personalized playlist
+## 🤝 Contributing
 
-## Note
+We built this in 30 minutes for a hackathon, but we'd love your contributions!
 
-You must serve the files through a web server (not just open the HTML file directly) because the app makes API calls that require proper CORS handling.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Ideas for Contributions:
+- Add more mood types
+- Integrate Spotify API for actual playback
+- Camera-based mood detection from facial expressions
+- User accounts and saved playlists
+- Mood tracking over time
+- Share playlists with friends
+- Mobile app version
+
+---
+
+## 🐛 Known Issues
+
+- API calls may fail without proper Claude API access (designed for Claude.ai artifacts environment)
+- Performance may vary on older devices due to canvas animations
+- No persistent storage (playlists reset on refresh)
+
+---
+
+## 🎓 Team
+
+Built with ❤️ by Hailegebriel, Moosay, Abel
+
+---
+
+## 🙏 Acknowledgments
+
+- **Anthropic** for Claude AI
