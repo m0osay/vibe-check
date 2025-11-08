@@ -176,7 +176,7 @@ function animate(config) {
 }
 
 // Start mood animation (called from app.js)
-function startMoodAnimation(moodData) {
+export function startMoodAnimation(moodData) {
     // Stop existing animation
     if (animationId) {
         cancelAnimationFrame(animationId);

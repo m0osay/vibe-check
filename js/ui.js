@@ -11,9 +11,10 @@ const moodLabel = document.getElementById('moodLabel');
 const moodDescription = document.getElementById('moodDescription');
 const energyLevel = document.getElementById('energyLevel');
 const playlistCards = document.getElementById('playlistCards');
+const testModeIndicator = document.getElementById('testModeIndicator');
 
 // Show loading state
-function showLoadingState() {
+export function showLoadingState() {
     loadingState.classList.remove('hidden');
     resultsSection.classList.add('hidden');
     errorMessage.classList.add('hidden');
@@ -21,13 +22,13 @@ function showLoadingState() {
 }
 
 // Hide loading state
-function hideLoadingState() {
+export function hideLoadingState() {
     loadingState.classList.add('hidden');
     submitBtn.disabled = false;
 }
 
 // Update mood display
-function updateMoodDisplay(moodData) {
+export function updateMoodDisplay(moodData) {
     moodLabel.textContent = moodData.mood;
     moodDescription.textContent = moodData.keywords.join(', ');
     
@@ -42,7 +43,7 @@ function updateMoodDisplay(moodData) {
 }
 
 // Display playlist
-function displayPlaylist(songs) {
+export function displayPlaylist(songs) {
     playlistCards.innerHTML = ''; // Clear existing
     
     songs.forEach((song, index) => {
@@ -64,7 +65,7 @@ function displayPlaylist(songs) {
 }
 
 // Show error message
-function showError(message) {
+export function showError(message) {
     hideLoadingState();
     errorMessage.textContent = message;
     errorMessage.classList.remove('hidden');
@@ -75,14 +76,37 @@ function showError(message) {
     }, 5000);
 }
 
-// Initialize - set up event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    submitBtn.addEventListener('click', handleMoodSubmit);
+// Export moodInput for use in app.js
+export { moodInput };
+
+// === INITIALIZE APP & EVENT LISTENERS ===
+
+// We wait for the DOM to be ready to ensure all elements exist
+document.addEventListener('DOMContentLoaded', async () => {
+    // Import handleMoodSubmit dynamically to avoid circular dependencies
+    const { handleMoodSubmit } = await import('./app.js');
     
-    // Allow Enter key to submit (Ctrl+Enter in textarea)
-    moodInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && e.ctrlKey) {
-            handleMoodSubmit();
-        }
-    });
+    // Check test mode status and show indicator
+    const { getTestModeStatus } = await import('./api.js');
+    if (getTestModeStatus() && testModeIndicator) {
+        testModeIndicator.classList.remove('hidden');
+    }
+    
+    // Check if the elements exist before adding listeners
+    if (submitBtn) {
+        submitBtn.addEventListener('click', handleMoodSubmit);
+    }
+
+    if (moodInput) {
+        moodInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                handleMoodSubmit();
+            }
+        });
+    }
+
+    console.log('Vibe Check initialized! 🎵');
+    if (getTestModeStatus()) {
+        console.log('🧪 Test mode is active - using mock data');
+    }
 });

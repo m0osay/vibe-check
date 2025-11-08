@@ -1,8 +1,13 @@
 // === MAIN APPLICATION CONTROLLER ===
 // Coordinates between UI, API, and Visualizer
 
+// Import functions from other modules
+import { analyzeMood, generatePlaylist } from './api.js';
+import { startMoodAnimation } from './visualizer.js';
+import { showLoadingState, hideLoadingState, updateMoodDisplay, displayPlaylist, showError, moodInput } from './ui.js';
+
 // Main function - handles the entire flow
-async function handleMoodSubmit() {
+export async function handleMoodSubmit() {
   const input = moodInput.value.trim();
 
   // Validation
@@ -47,6 +52,3 @@ async function handleMoodSubmit() {
     hideLoadingState();
   }
 }
-
-// Initialize when page loads
-console.log("Vibe Check initialized! 🎵");

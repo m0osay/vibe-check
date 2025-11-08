@@ -38,14 +38,17 @@ If you're using VS Code, you can install the "Live Server" extension and right-c
 
 ## Setup
 
-1. **Get a Claude API Key:**
-   - Sign up at [console.anthropic.com](https://console.anthropic.com)
-   - Create an API key
-   - The app will prompt you for the key on first use, or you can set it in browser localStorage
+1. **Get a Google Gemini API Key (FREE!):**
+   - Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
+   - Sign in with your Google account
+   - Click "Create API Key" 
+   - Copy your API key (starts with `AIza...`)
+   - **Note:** Gemini API has a generous free tier with rate limits, perfect for personal projects!
 
 2. **First Run:**
-   - When you first use the app, it will prompt you to enter your Claude API key
+   - When you first use the app, it will prompt you to enter your Gemini API key
    - The key will be stored in your browser's localStorage for future sessions
+   - You can clear it anytime by clearing your browser's localStorage
 
 ## Usage
 
