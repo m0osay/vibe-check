@@ -4,8 +4,6 @@
 
 Vibe Check is an AI-powered mood companion that analyzes your emotional state and creates personalized therapeutic playlists with stunning real-time visualizations.
 
-![Vibe Check Demo](assets/demo.gif)
-*[Add a demo GIF or screenshot here]*
 
 ---
 
