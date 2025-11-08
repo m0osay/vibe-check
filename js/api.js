@@ -121,18 +121,43 @@ function getMockPlaylist(moodData) {
     return playlists[moodData.mood] || defaultPlaylist;
 }
 
-// Get API key from localStorage or prompt user
-function getApiKey() {
-    let apiKey = localStorage.getItem('gemini_api_key');
-    if (!apiKey) {
-        apiKey = prompt('Please enter your Google Gemini API key:\n\nGet one free at: https://aistudio.google.com/app/apikey');
-        if (apiKey) {
-            localStorage.setItem('gemini_api_key', apiKey);
-        } else {
-            throw new Error("API key is required to use this app");
+// Cache for config API key
+let cachedConfigApiKey = null;
+
+// Get API key from config, localStorage, or prompt user
+async function getApiKey() {
+    // Priority 1: Check config.js file (only try once, then cache)
+    if (cachedConfigApiKey === null) {
+        try {
+            const config = await import('./config.js');
+            if (config.GEMINI_API_KEY && 
+                config.GEMINI_API_KEY !== 'YOUR_API_KEY_HERE' && 
+                config.GEMINI_API_KEY !== null) {
+                cachedConfigApiKey = config.GEMINI_API_KEY;
+                return cachedConfigApiKey;
+            }
+        } catch (error) {
+            // config.js doesn't exist or failed to load - that's okay
+            cachedConfigApiKey = false; // Mark as checked
         }
+    } else if (cachedConfigApiKey) {
+        return cachedConfigApiKey;
     }
-    return apiKey;
+    
+    // Priority 2: Check localStorage
+    let apiKey = localStorage.getItem('gemini_api_key');
+    if (apiKey) {
+        return apiKey;
+    }
+    
+    // Priority 3: Prompt user
+    apiKey = prompt('Please enter your Google Gemini API key:\n\nGet one free at: https://aistudio.google.com/app/apikey');
+    if (apiKey) {
+        localStorage.setItem('gemini_api_key', apiKey);
+        return apiKey;
+    } else {
+        throw new Error("API key is required to use this app");
+    }
 }
 
 // Initialize the SDK (will be set when API key is available)
@@ -149,12 +174,12 @@ async function callGemini(prompt, systemInstruction = '', jsonOutput = true) {
     try {
         // Initialize SDK if not already done
         if (!genAI) {
-            const apiKey = getApiKey();
+            const apiKey = await getApiKey();
             genAI = new GoogleGenerativeAI(apiKey);
         }
         
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash-latest",
+          model: "gemini-2.5-flash",
             systemInstruction: systemInstruction,
             generationConfig: {
                 // Force JSON output if requested
